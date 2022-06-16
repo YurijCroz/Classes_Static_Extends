@@ -17,7 +17,7 @@ class Worker {
         this.salary = salary;
         Worker.countWorker++
         Worker.id++
-        Worker.countSalary.push(salary)
+        Worker.countSalary.push(this.salary)
     }
     outInfoSalary(){
         return `The employee's salary ${this.salary}$`
@@ -60,6 +60,7 @@ class JointWorker extends Worker {
         let salaryDay = bid*=this.hoursWorked
         let salary = salaryDay*=24
         this.salary = salary
+        Worker.countSalary.push(this.salary)
     }
     outCountJointWorker(){
         return `Amount of part-time workers ${JointWorker.countJointWorker}`
@@ -93,9 +94,8 @@ console.log(worker1.outCountSalaryPerYear())
 console.groupEnd()
 
 //================================================================
-//jointWorker1.salaryPerMonth()
+
 const jointWorker1 = new JointWorker('Azik', 'WebDev', 5, 8)
-jointWorker1.salaryPerMonth()
 console.group('==================>')
 console.log(jointWorker1)
 jointWorker1.salaryPerMonth()
@@ -118,3 +118,5 @@ console.log(worker1.outCountWorker())
 console.log(worker1.outCountSalaryPerYear())
 console.log(jointWorker1.outCountJointWorker())
 console.groupEnd()
+
+console.log(Worker.countSalary)
