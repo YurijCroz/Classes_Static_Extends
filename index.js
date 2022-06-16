@@ -9,6 +9,7 @@
 class Worker {
     static countWorker = 0
     static countSalary = []
+    static workersList = []
     static id = 1000
     constructor(name, category, salary=0){
         this.id = Worker.id
@@ -18,6 +19,7 @@ class Worker {
         Worker.countWorker++
         Worker.id++
         Worker.countSalary.push(this.salary)
+        Worker.workersList.push(this)
     }
     outInfoSalary(){
         return `The employee's salary ${this.salary}$`
@@ -31,6 +33,17 @@ class Worker {
     }
     outCountSalaryPerYear(){
         let salaryWorkers = Worker.countSalary.reduce((a,b) => a+b)
+        return `We stuck on a very tidy sum ${salaryWorkers*=12}$`
+    }
+    outCountSalaryPerYear2(){
+        let test = Worker.workersList
+        let countSalary = []
+        test.forEach(el => {
+            Object.keys(el).forEach(key => {
+                if(key=='salary') countSalary.push(el[key])
+            })
+        })
+        let salaryWorkers = countSalary.reduce((a,b) => a+b)
         return `We stuck on a very tidy sum ${salaryWorkers*=12}$`
     }
 }
@@ -119,4 +132,6 @@ console.log(worker1.outCountSalaryPerYear())
 console.log(jointWorker1.outCountJointWorker())
 console.groupEnd()
 
-console.log(Worker.countSalary)
+console.group('========!!!!!!==========>')
+console.log(worker1.outCountSalaryPerYear2())
+console.groupEnd()
